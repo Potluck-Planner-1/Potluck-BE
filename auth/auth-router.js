@@ -53,6 +53,17 @@ router.post('/login',(req,res)=>{
     }
 });
 
+router.get('/',(req,res)=>{
+    Users.find().then(users=>{
+        res.status(200).json(users)
+    }).catch(err=>{
+        console.log(err);
+        res.status(500).json({
+            error: err.message
+        })
+    })
+})
+
 function generateToken(user){
     const payload = {
         subject: user.id,
