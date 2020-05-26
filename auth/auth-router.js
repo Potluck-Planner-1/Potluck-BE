@@ -32,9 +32,7 @@ router.post('/register',(req,res)=>{
 
 router.post('/login',(req,res)=>{
     if(isValidLogin(req.body)){
-        console.log('input body is', req.body.username);
         Users.findBy({username: req.body.username}).then(([user])=>{
-            console.log('system user is', user);
             if(user && bcryptjs.compareSync(req.body.password, user.password)){
                 const token = generateToken(user);
                 res.status(200).json({
