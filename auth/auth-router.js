@@ -3,7 +3,7 @@ const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const Users = require('../users/users-model');
-const { isValidRegister } = require('../users/users-service');
+const { isValidRegister, isValidLogin } = require('../users/users-service');
 const configSecret = require('../config/secret');
 
 router.post('/register',(req,res)=>{
@@ -32,7 +32,9 @@ router.post('/register',(req,res)=>{
 
 router.post('/login',(req,res)=>{
     if(isValidLogin(req.body)){
-        Users.findBy({username: req.body.username}).then(({user})=>{
+        console.log('input body is', req.body.username);
+        Users.findBy({username: req.body.username}).then(([user])=>{
+            console.log('system user is', user);
             if(user && bcryptjs.compareSync(req.body.password, user.password)){
                 const token = generateToken(user);
                 res.status(200).json({

@@ -21,7 +21,8 @@ function findById(id){
 }
 
 function findBy(filter){
-    return db('user').where(filter).orderBy('id')
+    console.log('filter is', filter);
+    return db('users').where(filter).orderBy('id');
 }
 
 function find(){
