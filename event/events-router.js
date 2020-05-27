@@ -33,7 +33,7 @@ router.get('/:id',(req,res)=>{
 })
 
 //adding items to pot
-router.post('/pot/:id',(req,res)=>{
+router.post('/event/:id',(req,res)=>{
     const {id} = req.params;
     if(isValidItem(req.body)){
         Event.addingItem(id, req.body).then(ids=>{
@@ -43,9 +43,22 @@ router.post('/pot/:id',(req,res)=>{
         })
     } else {
         res.status(400).json({
-            message: "Please provide person name, the item they are bringing and the amount of said item"
+            message: "Please provide the name of the item"
         })
     }
+})
+
+//listing items for event
+router.get('/event/:id',(req,res)=>{
+    const {id} = req.params;
+    Event.listItemsByEventId(id).then(items=>{
+        res.status(200).json(items)
+    }).catch(err=>{
+        console.log(err);
+        res.status(500).json({
+            error: err.message
+        })
+    })
 })
 
 module.exports = router;

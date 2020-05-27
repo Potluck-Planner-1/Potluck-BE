@@ -8,5 +8,5 @@ function isValidEvent(event){
 }
 
 function isValidItem(item){
-    return Boolean(item.person && item.item && item.ammount);
+    return Boolean(item.name);
 }
