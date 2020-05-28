@@ -4,18 +4,15 @@ module.exports = {
     findEventById,
     addingEvent,
     listEventByUserId,
-    //deletingPot,
+
+    findItemById,
     addingItem,
     listItemsByEventId,
-    //deletingItem,
-    
-    //addingPotItems
 }
 
 function findEventById(id){
     return db('events').where({id}).first();
 }
-
 function addingEvent(user_id, event) {
     return db('events')
     .where({organizer_id: user_id})
@@ -24,15 +21,14 @@ function addingEvent(user_id, event) {
         return findEventById(ids[0]);
     })
 }
-
 function listEventByUserId (id){
     return db('events').where({organizer_id: id}).orderBy('id').select('event_name','date','time','location');
 }
 
+
 function findItemById(id){
     return db('items').where({id}).first();
 }
-
 function addingItem(event_id, item) {
     return db('items')
     .where({potluck_id:event_id})
@@ -41,7 +37,6 @@ function addingItem(event_id, item) {
         return findItemById(ids[0]);
     })
 }
-
 function listItemsByEventId(id){
     return db('items').where({potluck_id: id}).orderBy('id').select('name');
 }
