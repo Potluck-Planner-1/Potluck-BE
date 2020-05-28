@@ -3,7 +3,7 @@ const Event = require('./events-model');
 const router = express.Router();
 const {isValidEvent, isValidItem} = require('./events-service');
 
-//creating new pot for user
+//creating new event for user
 router.post('/:id',(req,res)=>{
     const {id} = req.params;
     if(isValidEvent(req.body)){
@@ -19,7 +19,7 @@ router.post('/:id',(req,res)=>{
     }
 })
 
-//viewing current pot for user
+//viewing current events for user
 router.get('/:id',(req,res)=>{
     const {id} = req.params;
     Event.listEventByUserId(id).then(pots=>{
@@ -32,7 +32,7 @@ router.get('/:id',(req,res)=>{
     })
 })
 
-//adding items to pot
+//adding items to event
 router.post('/event/:id',(req,res)=>{
     const {id} = req.params;
     if(isValidItem(req.body)){
@@ -48,7 +48,7 @@ router.post('/event/:id',(req,res)=>{
     }
 })
 
-//listing items for event
+//listing items for given event id
 router.get('/event/:id',(req,res)=>{
     const {id} = req.params;
     Event.listItemsByEventId(id).then(items=>{

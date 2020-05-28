@@ -11,6 +11,7 @@ server.use(helmet());
 const authRouter = require('./auth/auth-router');
 const eventRouter = require('./event/events-router');
 const inviteRouter = require('./invite/invites-router');
+const guestItemRouter = require('./item/guestItem-router');
 
 const authenticate = require('./auth/auth-middleware');
 
@@ -21,6 +22,6 @@ server.get('/',(req,res)=>{
 server.use('/api/auth', authRouter);
 server.use('/api/user',authenticate, eventRouter);
 server.use('/api/invite', authenticate, inviteRouter);
-
+server.use('/api/guestItem', guestItemRouter);
 
 module.exports = server;
