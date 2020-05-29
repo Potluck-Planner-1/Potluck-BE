@@ -27,4 +27,18 @@ router.post('/:id',(req,res)=>{
     }
 })
 
+//showing all items picked by users given user's id
+router.get('/:id',(req, res)=>{
+    const {id} = req.params;
+    GuestItem.listAllItemByUserId(id).then(items=>{
+        res.status(200).json(items)
+    }).catch(err=>{
+        console.log(err);
+        res.status(500).json({
+            error: err.message
+        })
+    })
+
+})
+
 module.exports = router;

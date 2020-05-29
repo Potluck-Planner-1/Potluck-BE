@@ -4,6 +4,7 @@ module.exports = {
     findBy,
     guestPickItem,
     findGuestItemById,
+    listAllItemByUserId,
 }
 
 function findBy(filter){
@@ -20,4 +21,11 @@ function guestPickItem(item_id, guest_id){
 
 function findGuestItemById(id){
     return db('guest_item').where({id}).first();
+}
+
+function listAllItemByUserId(id){
+    return db('guest_item')
+    .join('items', 'items.id', '=', 'guest_item.item_id')
+    .where({guest_id: id})
+    .select('guest_item.item_id', 'items.name', 'items.potluck_id')
 }

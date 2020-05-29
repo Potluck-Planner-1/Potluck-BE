@@ -16,6 +16,20 @@ module.exports = {
       directory: './data/seeds',
     },
   },
+  
+  testing:{
+    client: "sqlite3",
+    connection: {
+      filename:'./data/test.db3',
+    },
+    useNullAsDefault: true,
+    migrations: { //npx knex migrate:latest --env testing
+      directory: './data/migrations',
+    },
+    seeds: {
+      directory: './data/seeds',
+    }
+  },
 
   staging: {
     client: 'postgresql',

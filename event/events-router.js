@@ -3,7 +3,7 @@ const Event = require('./events-model');
 const router = express.Router();
 const {isValidEvent, isValidItem} = require('./events-service');
 
-//creating new event for user
+//creating new event with given user id
 router.post('/:id',(req,res)=>{
     const {id} = req.params;
     if(isValidEvent(req.body)){
